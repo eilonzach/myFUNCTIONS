@@ -16,7 +16,7 @@ for im = 1:m
 C=sum(cos(theta(:,im)));
 S=sum(sin(theta(:,im)));
 if C==0; error('angles sum to nothing'); end
-if S==0; mu=0; end
+if S==0; mu(im)=0; end
 % fprintf('sample mean resultant length, mrlR, is %.3f \n',mrlR);
 if S>0 && C>0
     mu(im)=atan(S/C); % in radians
