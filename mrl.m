@@ -1,8 +1,9 @@
 function [ mrlR,mu,Var,sdev ] = mrl( theta,r,option )
-% [ mrlR,mu,Var,sdev ] = mrl( theta,length,option )
+% [ mrlR,mu,Var,sdev ] = mrl( theta,r,option )
 % calculates the mean resultant length of a set of angles in RADIANS
 % the option is for 'axial' (i.e. 181=1) or 'direct' data
-% NB can omit r
+% NB can omit r - this is the length (i.e. weighting) of each element of
+% theta
 % OUTPUTS
 % mrlR  - the mean resultant length of the average vector
 % mu    - the direction of the average vector

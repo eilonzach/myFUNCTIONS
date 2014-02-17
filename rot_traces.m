@@ -1,5 +1,5 @@
 function [ datZYX_ ] = rot_traces( datZYX, theta )
-% [ datZYX_ ] = rot_traces( datZYX, theta )
+% [ datZYX_ ] = zne2zrt( datZYX, theta )
 %   Function to rotate traces from right handed coordinates (ZYX) to new
 %   right handed coordinates (ZY'X') where Z is positive downwards
 % 

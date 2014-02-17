@@ -22,6 +22,7 @@ if (nargin == 0)
    error('Missing input.');
 end
 
+
 % Section 1: Restructure input to create x vector.
 
 if (nargin == 1)

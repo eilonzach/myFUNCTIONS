@@ -21,7 +21,7 @@ if S>=0 && C>0
     polest=atan(S/C); % in radians
 elseif S<0 && C>0
     polest=atan(S/C) + 2*pi; % in radians
-elseif C<=0
+elseif C<0
     polest=atan(S/C)+pi; % in radians
 end
 
