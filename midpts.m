@@ -6,16 +6,8 @@ function [ out_vect ] = midpts( in_vect )
 %
 % at some point expand this function to do 2,3 DIM matrices
 
-N = length(in_vect);
 
-if size(in_vect,1) > size(in_vect,2)
-out_vect = zeros(N-1,1);
-else out_vect = zeros(1,N-1);
-end
-
-for ii = 1:N-1
-    out_vect(ii) = mean([in_vect(ii),in_vect(ii+1)]);
-end
+    out_vect = 0.5*(in_vect(1:end-1)+in_vect(2:end));
 
 
 end
