@@ -18,6 +18,13 @@ elseif ax == 1
            0     0     0    N  0  0
            0     0     0    0  L  0
            0     0     0    0  0  L ];   
+elseif ax == 11
+ CC6 = [   C     F   A-2*N  0  0  0
+           F     C   A-2*N  0  0  0
+         A-2*N A-2*N   A    0  0  0
+           0     0     0    N  0  0
+           0     0     0    0  N  0
+           0     0     0    0  0  L ];   
 end
            
            

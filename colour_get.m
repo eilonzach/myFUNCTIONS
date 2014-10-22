@@ -1,7 +1,8 @@
-function [rgbs] = colour_get(v,vmax,vmin,colourscheme)
+function [rgbs] = colour_get(v,vmax,vmin,colourmap)
 %  [rgbs] = colour_get(v,vmax,vmin,colourscheme)
 % 
-% This function takes a vector of numerical values and returns the corresponding [r g b] values so they can be plotted by colour
+% This function takes a vector of numerical values and returns the
+% corresponding [r g b] values so they can be plotted by colour
 %
 % INPUT	  v 	Nx1 vector of numerical values
 % 		  vmax	maximum on scale (optional, will use 1 as default)
@@ -20,7 +21,7 @@ end
 if nargin < 4
 cmap = colormap;
 else
-cmap = colormap(colourscheme);
+cmap = colourmap;
 end
 
 v(v>vmax) = vmax;
