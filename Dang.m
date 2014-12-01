@@ -1,13 +1,16 @@
-function [ answ ] = Dang( a1,a2,acrit,unit,axial )
-%[ answ ] = Dang( a1,a2,acrit,unit,axial )
-% Function to assess whether two angles differ by more or less than a
-% critical amount
+function [ out ] = Dang( a1,a2,acrit,unit,axial )
+%[ out ] = Dang( a1,a2,acrit,unit,axial )
+% Function to assess whether two angles differ by more than acrit
+% 
 % INPUTS
-% a1    : angle 1
-% a2    : angle 2
-% acrit : if a1 and a2 differ by more than this, the fn will output 0
-% unit  : 'deg' or 'rad' - 
-% axial : 'axis' or 'direct' - option to care about polarisation (i.e. are 0 and 180 the same?)
+%  a1    : angle 1
+%  a2    : angle 2
+%  acrit : critical angle to check if a1 and a2 differ by more than
+%  unit  : 'deg' or 'rad' - 
+%  axial : 'axis' or 'direct' - option to care about polarisation (i.e. are 0 and 180 the same?)
+% 
+% OUTPUTS
+%  out   : 0 if |a1-a2| > acrit , 1 if |a1-a2| <= crit
 
 % setup
 if nargin < 3
@@ -36,9 +39,9 @@ mrlR = 0.5*sqrt((1+cosd(da)).^2 + sind(da).^2);
 mrlRcrit = 0.5*sqrt((1+cosd(acrit))^2 + sind(acrit)^2);
 % output
 if mrlR < mrlRcrit 
-answ=0;
+out=0;
 else
-answ=1;
+out=1;
 end
 
 

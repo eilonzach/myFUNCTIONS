@@ -1,8 +1,10 @@
 function [ cc,CC6 ] = Etensor_hex( A,C,F,L,N,ax )
-%[ cc,CC6 ] = elastic_constants( A,C,F,L,N )
+%[ cc,CC6 ] = Etensor_hex( A,C,F,L,N,ax )
 %   function to create the elastic tensor from the 5 Love parameters
-% ax denotes which is the symmetry axis - by default is 3, but seismos
-% like 1
+% ax denotes which is the symmetry axis 
+% so, if ax == 1, then [1 0 0] is the symmetry axis
+%   and then if N > L, a wave travelling down [1 0 0] sees two slow
+%   velocities
 
 if ax == 3
 CC6 = [   A   A-2*N    F    0  0  0

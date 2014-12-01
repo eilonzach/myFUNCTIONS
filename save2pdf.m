@@ -1,4 +1,4 @@
-function [filepath] = save2pdf(fignumber,filename,odir,orientation)
+function [filepath] = save2pdf(fignumber,filename,odir)
 % function [filepath] = save2pdf(fignumber,filename,odir)
 % 
 % function to save a figure to a good-quality pdf
@@ -7,10 +7,7 @@ function [filepath] = save2pdf(fignumber,filename,odir,orientation)
 % fignumber - (required) number of figure to save
 % filename - (optional, default is figN) name of saved file
 % odir - (optional, default is current dir) dir to save file in
-% orientation - orientation of the page
-if nargin < 4
-    orientation = 'portrait';
-end
+
 if nargin < 3
     odir = pwd;
 end
@@ -27,9 +24,33 @@ if strcmp(odir(end),'/')~=1
 end
 
 h = figure(fignumber);
+
+%% Figure size sorting
+scrn_wd = 11.28*2.54; % inches to cm
+scrn_ht =  7.05*2.54; % inches to cm
+pos = get(h,'position');
+switch get(h,'Units')
+    case 'pixels'
+        wd = pos(3)*(scrn_wd/1440); % in cm
+        ht = pos(4)*(scrn_ht/800); % in cm
+    case 'centimeters'
+        wd = pos(3); % in cm
+        ht = pos(4); % in cm
+end
+ 
+if wd > ht
+    orientation = 'landscape';
+else
+    orientation = 'portrait';
+end
+
+
+
+
+set(h,'papertype','usletter');
 set(h,'paperorientation',orientation);
-set(h,'PaperUnits','normalized');
-set(h,'PaperPosition', [0 0 1 1]);
+set(h,'PaperUnits','centimeters');
+set(h,'PaperPosition', [0 0 wd ht]);
 print(h,'-painters','-dpdf','-r200',strcat(odir,filename))
 
 filepath = strcat(odir,filename,'.pdf');
