@@ -38,18 +38,18 @@ switch get(h,'Units')
         ht = pos(4); % in cm
 end
  
-if wd > ht
-    orientation = 'landscape';
-else
-    orientation = 'portrait';
-end
+% if wd > ht
+%     orientation = 'landscape';
+% else
+%     orientation = 'portrait';
+% end
+% set(h,'paperorientation',orientation);
 
 
 
 
-set(h,'papertype','usletter');
-set(h,'paperorientation',orientation);
 set(h,'PaperUnits','centimeters');
+set(h,'papersize',[wd ht]);
 set(h,'PaperPosition', [0 0 wd ht]);
 print(h,'-painters','-dpdf','-r200',strcat(odir,filename))
 
