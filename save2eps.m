@@ -1,5 +1,5 @@
-function [filepath] = save2jpg(fignumber,filename,odir)
-% function [filepath] = save2jpg(fignumber,filename,odir)
+function [filepath] = save2eps(fignumber,filename,odir)
+% function [filepath] = save2eps(fignumber,filename,odir)
 % 
 % function to save a figure to a good-quality jpg
 %

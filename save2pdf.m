@@ -23,16 +23,22 @@ if strcmp(odir(end),'/')~=1
     odir = strcat(odir,'/');
 end
 
+if ~strcmp(filename(end-3:end),'.pdf')
+    filename = [filename '.pdf'];
+end
+
 h = figure(fignumber);
 
 %% Figure size sorting
-scrn_wd = 11.28*2.54; % inches to cm
-scrn_ht =  7.05*2.54; % inches to cm
+% scrn_wd = 11.28*2.54; % inches to cm
+% scrn_ht =  7.05*2.54; % inches to cm
+% scrn = get(0,'ScreenSize');
 pos = get(h,'position');
 switch get(h,'Units')
     case 'pixels'
-        wd = pos(3)*(scrn_wd/1440); % in cm
-        ht = pos(4)*(scrn_ht/800); % in cm
+        ppcm = get(0,'ScreenPixelsPerInch')/2.54;
+        wd = pos(3)/ppcm; % in cm
+        ht = pos(4)/ppcm; % in cm
     case 'centimeters'
         wd = pos(3); % in cm
         ht = pos(4); % in cm
@@ -46,12 +52,10 @@ end
 % set(h,'paperorientation',orientation);
 
 
-
-
 set(h,'PaperUnits','centimeters');
 set(h,'papersize',[wd ht]);
 set(h,'PaperPosition', [0 0 wd ht]);
 print(h,'-painters','-dpdf','-r200',strcat(odir,filename))
 
-filepath = strcat(odir,filename,'.pdf');
+filepath = strcat(odir,filename);
 end
