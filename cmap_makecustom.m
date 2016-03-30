@@ -12,6 +12,9 @@ function [ cc ] = cmap_makecustom( c1, c2, wtfrac )
 % 
 % OUTPUT:
 %   cc      colourmap: a (200 x 3) matrix, can be called with colormap(cc)
+% 
+% Written by Zach Eilon, 2012
+
 
 if nargin < 3
     wtfrac=0;
@@ -29,9 +32,9 @@ whitw = ones(2*W,1);
 d1 = 1-c1;
 d2 = 1-c2;
 
-bb = [c1(1)*flatm + d1(1)*rampu; whitw; c2(1)*flatm + d2(1)*rampd];
+rr = [c1(1)*flatm + d1(1)*rampu; whitw; c2(1)*flatm + d2(1)*rampd];
 gg = [c1(2)*flatm + d1(2)*rampu; whitw; c2(2)*flatm + d2(2)*rampd];
-rr = [c1(3)*flatm + d1(3)*rampu; whitw; c2(3)*flatm + d2(3)*rampd];
+bb = [c1(3)*flatm + d1(3)*rampu; whitw; c2(3)*flatm + d2(3)*rampd];
 
 cc = [rr gg bb];
 end

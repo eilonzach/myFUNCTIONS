@@ -27,6 +27,9 @@ function [fastaz, DinvV, Vav, anis] = aniso3D(inth,raz,faz,ap,bp,anistype,aniscu
 % (1) is global vertical    or      fabric a-axis
 % (2) is global east        or      fabric b-axis
 % (3) is global north       or      fabric c-axis
+%
+% Written by Zach Eilon, 2013
+
 
 %% Defining ray vector
 % % NOT clockwise difference between fast and propagation angle - i.e. if fast is zero and foraz =10, az=10.
@@ -43,8 +46,6 @@ rot3 = [cosd(-bp)  -sind(-bp)  0 ; sind(-bp) cosd(-bp) 0 ; 0  0  1]; % "-" becau
 rotall = rot0*rot1*rot2*rot3;
 % rotall is rotation from global (1)(2)(3) to local (a)(b)(c)
 
-[cc, CC6, den] = anisotens(anistype);
-
 if anistype==99
     SVav = aniscustom(1); SVanis=aniscustom(2);
     % based on from Anderson 1989 "Transverse isotropic" (2)  11.6%S
@@ -53,7 +54,8 @@ if anistype==99
     N = SVav^2 * den * (1 - 0.01*SVanis)^2;
     L = SVav^2 * den * (1 + 0.01*SVanis)^2;
     [ cc,~ ] = Etensor_hex( A,C,F,L,N,1 );
-    
+else
+    [cc, CC6, den] = anisotens(anistype);
 end
 
 n=rotall*rvec; % propagation vector in fabric coördinates

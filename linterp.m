@@ -1,10 +1,12 @@
 function [ YI ] = linterp(X,Y,XI)
-% YI = INTERP1(X,Y,XI) interpolates to find YI, the values of the
+% YI = LINTERP(X,Y,XI) interpolates to find YI, the values of the
 %     underlying function Y at the points in the array XI. X must be a
 %     vector of length N.
 % this function differs from the simple interp1 matlab function in that it
 % can accept a vector x with multiple values of y (e.g. at the top of one
 % layer and the bottom of another)
+%
+% Z. Eilon   May 2015
 
 YI = zeros(size(XI));
 

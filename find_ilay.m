@@ -18,8 +18,8 @@ if any(r < min(Rb)) || any(r > max(Rb))
     error('r must be within extremes of Rb')
 end
 
-if iscolumn(r)~=1, r = r'; end
-if iscolumn(Rb)~=1, Rb = Rb'; end
+r = r(:);
+Rb = Rb(:);
 
 N = length(r);
 Nlay = length(Rb);

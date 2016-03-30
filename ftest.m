@@ -18,6 +18,8 @@ function [ P ] = ftest( res1,parms1,res2,parms2 )
 % where N is the number of data, or length(res*)
 % The residuals are just equal to dobs-dpred, so we square and sum these to
 % get the chi^2 values (Ea)
+% 
+% Z. Eilon
 
 N1 = length(res1);
 N2 = length(res2);

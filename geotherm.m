@@ -22,6 +22,8 @@ function [ TempZ ] = geotherm( age,coolopt,Z,Tpot,kappa,dTdz_ad,Zplate  )
 % 
 % OUTPUTS
 %    TempZ   = vector of temperatures (in C) at each depth
+% 
+% Z. Eilon Jan 2015
 
 
 if nargin < 2

@@ -2,6 +2,8 @@ function [ lat,lon,mag ] = addpolarvect( lat1,lon1,mag1,lat2,lon2,mag2 )
 %[ lat,lon,mag ] = addpolarvect( lat1,lon1,mag1,lat2,lon2,mag2 )
 % this function adds two vectors in polar coordinates
 % input lat/lon must be in degrees
+%
+% Written by Zach Eilon, 2011
 
 colat1=90-lat1;
 colat2=90-lat2;

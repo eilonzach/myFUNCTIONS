@@ -1,7 +1,8 @@
-function [ mrlR,mu,Var,sdev ] = mrl( theta,r,option )
-% [ mrlR,mu,Var,sdev ] = mrl( theta,r,option )
-% calculates the mean resultant length of a set of angles in RADIANS
+function [ mrlR,mu,Var,sdev ] = mrl( theta,r,option,units )
+% [ mrlR,mu,Var,sdev ] = mrl( theta,r,option,units )
+% calculates the mean resultant length of a set of angles
 % the option is for 'axial' (i.e. 181=1) or 'direct' data
+% units can be 'radians' (default, recommended) or 'degrees' 
 % NB can omit r - this is the length (i.e. weighting) of each element of
 % theta
 % OUTPUTS
@@ -18,6 +19,10 @@ function [ mrlR,mu,Var,sdev ] = mrl( theta,r,option )
 if nargin < 2
     r = ones(size(theta));
 end
+if nargin < 4
+    units = 'radians';
+end
+if strcmp(units,'degrees'), theta = d2r(theta); end
 
 if nargin == 2 % if you put just angles and then option for axial or direct
     if ischar(r)==1
@@ -70,6 +75,10 @@ end
 Var = 1-(mrlR./mean(r));
 sdev=sqrt(-2.*log(1-Var));
 
-% mud=r2d(mu); % in degrees
+if strcmp(units,'degrees'), 
+    mu  = r2d(mu); 
+    sdev = r2d(sdev);
+end % in degrees
+
 end
 

@@ -19,6 +19,9 @@ function [phipred,dTpred,SIpred] = anispred_sl(phitrue,dTtrue,period,betas,ploto
 % phipred = predicted net values of phi for each arrival in betas
 % dTpred = predicted net values of dT for each arrival in betas
 % SIpred = predicted net values of splitting intensity for each arrival in betas
+%
+% Written by Zach Eilon, 2013
+
 
 if nargin<4
     betas=0:1:359;

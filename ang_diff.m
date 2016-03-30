@@ -12,6 +12,8 @@ function [ da ] = ang_diff( a1,a2,unit,mode )
 % 
 % OUTPUT
 % da = the absolute angular difference between a1 and a2, in input units
+%
+% Written by Zach Eilon, 2012
 
 if nargin<3
     unit='degrees';

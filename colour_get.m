@@ -15,6 +15,12 @@ function [rgbs] = colour_get(v,vmax,vmin,colourmap)
 %
 % OUTPUT  rgbs	Nx3 matrix specifying colours corresponding to numerical values in v
 % N.B. uses colormap to get vectors and then linear interpolates to values
+% 
+% Written by Zach Eilon, 2014
+if vmax == vmin
+    rgbs = ones(length(v),1)*[0 0 0];
+    return
+end
 
 if nargin < 2
 vmax = max(v);

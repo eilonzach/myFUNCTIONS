@@ -21,6 +21,6 @@ elseif size(datZYX,2)==3 % 3-component
 datZYX_(:,1) = datZYX(:,1);
 datZYX_(:,2:3) = datZYX(:,2:3)*R';
 end
-
+% 
 end
 

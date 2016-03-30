@@ -1,4 +1,4 @@
-function [ Mw_or_Mo ] = Mw_calc( option, Mo_or_Mw, unit );
+function [ Mw_or_Mo ] = Mw_calc( option, Mo_or_Mw, unit )
 % [ Mw_or_Mo ] = Mw_calc( option, Mo_or_Mw, unit )
 %   function to calculate moment magnitude from mantissa and exponent of
 %   moment, or vice versa!
@@ -8,6 +8,8 @@ function [ Mw_or_Mo ] = Mw_calc( option, Mo_or_Mw, unit );
 % Mw = Mw_calc('Mo2Mw',1.0e25,unit) - where unit = 'dynecm'/'Nm'
 % Mo = Mw_calc('Mw2Mo',6.2)
 % Mo = Mw_calc('Mw2Mo',6.2, unit)
+% 
+% Z. Eilon 2015
 
 if nargin < 3,
     unit = 'dynecm';

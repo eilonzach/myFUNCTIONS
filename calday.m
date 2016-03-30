@@ -3,6 +3,9 @@ function [MM,DD] = calday(YYYY,JJJ,mode)
 % converts day of year into calendar date (month & day)
 % if mode is 's', will output two 2-character strings
 % if mode is 'i', will output two numbers
+%
+% Written by Zach Eilon, 2011
+
 
 if nargin==1
     JJJ=YYYY;

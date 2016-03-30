@@ -18,16 +18,23 @@ function [ dT ] = aniscalc_dt( anis, Vav, L )
 % (3)  dT   = L/v2 - L/v1
 %
 % from (1) and (2) we also have
-% (4)  v1   = Vav*(1+anis)
-% (5)  v2   = Vav*(1-anis)
-
+% (4)  v1   = Vav*(1 + anis/2)
+% (5)  v2   = Vav*(1 - anis/2)
+%
 % By simply combining (3),(4),(5) above, we obtain:
+% (6) dT = (L/Vav) *A /(1 - 0.25*A^2);
+%
+% Note that since A << 1 and A^2 ~ 0 for real rocks, this definition of
+% anisotropy gives dT ~ A*(L/Vav)
+%
+% Also,  L = dT*(Vav./A)*(4 - A.^2)/4;
+
+% Written by Zach Eilon, Jan 2012
+
 
 A = anis./100;
 
 dT = (L./Vav).*A./(1 - 0.25.*A.^2);
-
-% Thus clearly L = dT*(Vav./A)*(4 - A.^2)/4;
 
 
 end

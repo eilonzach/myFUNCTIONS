@@ -16,7 +16,11 @@ R = [cosd(foraz) sind(foraz); -sind(foraz) cosd(foraz)]; %Rotation matrix
 if size(datZNE,1)< size(datZNE,2), datZNE = datZNE'; end % flip if in rows
 datZRT = zeros(size(datZNE));
 
-if size(datZNE,2)==2 % only horiz components
+
+if size(datZNE,2)==1 % assume this is only Z
+fprintf(' !! only Z channel !! ')
+datZRT = datZNE;   
+elseif size(datZNE,2)==2 % only horiz components
 datZRT = datZNE*R';
 elseif size(datZNE,2)==3 % 3-component
 datZRT(:,1) = datZNE(:,1);

@@ -4,6 +4,9 @@ function [ distance ] = dist2line( Q1,Q2,P )
 %   series of points, P in a NxD vector (where D is 2 for a plane, and 3
 %   for 3-space
 % Q1 and Q2 are 1xD vectors defining the line ends
+% 
+% Written by Zach Eilon, 2013
+
 
 N = size(P,1);
 

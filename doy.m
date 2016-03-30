@@ -3,6 +3,9 @@ function [JJJ] = doy(YYYY,MM,DD,mode)
 % converts calendar date (day + month) into day of year
 % if mode is 's', will output a 3-character string
 % if mode is 'i', will output a number
+% 
+% Written by Zach Eilon, 2011
+
 if nargin==3
     JJJ=datenum(YYYY,MM,DD)-datenum(YYYY,0,0);
 elseif nargin==4

@@ -28,6 +28,9 @@ function [foraz,backaz,gcdist,gcarc] = ellipsep (lat1,long1,lat2,long2)
 % ?	= alpha     azimuth at the equator;
 % s	= gcdist    ellipsoidal distance between the two points;
 % ?	= gcarc     arc length between points on the auxiliary sphere;
+% 
+% Written by Zach Eilon, 2012
+
 if lat1>lat2
     sign=-1;
 else

@@ -11,6 +11,9 @@ function [ out ] = Dang( a1,a2,acrit,unit,axial )
 % 
 % OUTPUTS
 %  out   : 0 if |a1-a2| > acrit , 1 if |a1-a2| <= crit
+% 
+% Written by Zach Eilon, 2012
+
 
 % setup
 if nargin < 3

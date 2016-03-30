@@ -1,28 +1,28 @@
-function [ odat,SNRest,dofps ] = noisify_2( idat,ndat,samprate,SNR,smoothing,plotopt,theta,phi,dT )
-% function [ odat,SNRest,dofps ] = noisify( idat,ndat,samprate,SNR,smoothing,plotopt,theta,phi,dT )
+function   [ odat,SNRest,dofps ] = noisify_2( idat,ndat,samprate,SNR,smoothing,plotopt,theta,phi,dT )
+% function [ odat,SNRest,dofps ] = noisify_2( idat,ndat,samprate,SNR,smoothing,plotopt,theta,phi,dT )
 % 
 % Function to take an input set of data (idat) and add noise with the power
 % distribution of an input noise series (ndat). Ideally the two input
 % series should be of the same length and sample rate
 %
 % INPUTS:
-% idat     - time series of data in columns (e.g. 3 channels would be an
-%              nsamps x nchans matrix) (try to have E,N,Z)
-% ndat     - time series of several noisy data clips in columns 
-%              i.e. nsamps x nchans x nclips Noise window should have no arrival. 
-% samprate - sample rate of input time series (samples per second)
-% SNR      - signal to noise ratio desired
-% smoothing   - 1 to smooth noise psd, anything else will not.
-% plotopt  - 1 to plot, anything else will not.
+% idat       - time series of data in columns (e.g. 3 channels would be an
+%                nsamps x nchans matrix) (try to have E,N,Z)
+% ndat       - time series of several noisy data clips in columns 
+%                i.e. nsamps x nchans x nclips Noise window should have no arrival. 
+% samprate   - sample rate of input time series (samples per second)
+% SNR        - signal to noise ratio desired
+% smoothing  - 1 to smooth noise psd, anything else will not.
+% plotopt    - 1 to plot, anything else will not.
 % -- if you have them --
-% theta    - forward azimuth of incoming SKS wave (relative to north)
-% phitrue  - true fast direction (relative to north)
-% dttrue   -  true time delay between fast and slow
+% theta      - forward azimuth of incoming SKS wave (relative to north)
+% phitrue    - true fast direction (relative to north)
+% dttrue     -  true time delay between fast and slow
 % 
 % OUTPUTS:
-% odat     - output time series, same size as idat and with noise added
-% SNRest   - measured SNR of odat
-% dofps    - degrees of freedom per second of the output series
+% odat       - output time series, same size as idat and with noise added
+% SNRest     - measured SNR of odat
+% dofps      - degrees of freedom per second of the output series
 %
 % Define SNR as max(initial signal)/2*std(noise) the max of the initial
 % signal is not the same as the max value of the post-split signal (idat)
@@ -235,6 +235,8 @@ end % while dSNR too big
 % calculate using first zero-crossing of odat acf
 dofps = zeros(nchans,1);
 for ic = 1:nchans
+    try
     spdof = min(abs(zerof(xcorr(odat(:,ic))) - nsamps))/samprate;
     dofps(ic) = 1./spdof;
+    end
 end

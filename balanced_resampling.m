@@ -11,6 +11,9 @@ function [ indxs ] = balanced_resampling( Ndata,niter )
 %   indxs   = Ndata x niter matrix, each column of which is a set of
 %              indices from the original dataset. Each index appears a
 %              total of precisely niter times in the whole matrix
+%
+% Written by Zach Eilon, 2014
+
 
 xx = [1:Ndata]';
 

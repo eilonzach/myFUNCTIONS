@@ -13,7 +13,7 @@ function [ minX_ind ] = mindex( X,a )
 %   the minimum value in X - i.e more efficient than the clunkier:
 %       Y(find(X==min(X)) or, more often, Y(find((X-a)==min(X-a)))
 %   Instead, can now use
-%       Y(mindex(X)) or Y(mindex(X-a))
+%       Y(mindex(X)) or Y(mindex(X,a))
 
 if nargin<2
 [~,minX_ind] = min(X);

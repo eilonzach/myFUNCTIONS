@@ -4,6 +4,9 @@ function [ distance ] = dist_along_line( Q1,Q2,P )
 %   and calculates the distance each of the projected points from Q1
 %   P in a NxD vector (where D is 2 for a plane, and 3 for 3-space.
 %   Q1 and Q2 are 1xD vectors defining the line ends
+% 
+% Written by Zach Eilon, 2015
+
 
 N = size(P,1);
 

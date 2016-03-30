@@ -24,6 +24,9 @@ function [ dT ] = dt_aniscalc( anis, Vav, L )
 % By simply combining (3),(4),(5) above, we obtain:
 % 
 % dT = (L./Vav).*(2.*A)./(1 - A.^2);
+% 
+% Written by Zach Eilon, 2012
+
 
 A = anis/100;
 

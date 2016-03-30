@@ -4,6 +4,9 @@ function [minang,maxang] = angrange(depth,phase,vSsurf)
 % angular window for which a given phase arrives at surface station inputs
 % are: depth of event (in km), phase required (string with quotes) and the
 % surface velocity (optional)
+%
+% Written by Zach Eilon, 2012
+
 
 % depth=20;
 % phase='SKS';

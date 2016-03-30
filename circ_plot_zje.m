@@ -41,9 +41,11 @@ function a = circ_plot_zje(alpha, format, formats, varargin)
 %    
 %
 % Circular Statistics Toolbox for Matlab
-
+%
 % By Philipp Berens & Marc J. Velasco, 2009
 % velasco@ccs.fau.edu, berens@tuebingen.mpg.de
+% 
+% Edited by Zach Eilon, 2012
 
 if nargin < 2 || isempty(format)
     format = '';
