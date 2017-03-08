@@ -1,5 +1,5 @@
 function outstruct = dealto(instruct,fieldname,vals_array)
-%  outstruct = dealto(instruct,array)
+%  outstruct = dealto(instruct,fieldname,vals_array)
 %  function to deal elements of some array - be that a cell array or a
 %  vector into a particular field of a structure
 %  e.g. let's say I have a structure "eq" with fields .sta, .artime and I

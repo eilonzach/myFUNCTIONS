@@ -7,6 +7,7 @@ function [ YI ] = linterp(X,Y,XI)
 % layer and the bottom of another)
 %
 % Z. Eilon   May 2015
+X = X(:); Y = Y(:); XI = XI(:);
 
 YI = zeros(size(XI));
 

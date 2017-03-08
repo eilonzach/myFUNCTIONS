@@ -15,6 +15,9 @@ function [ hcb ] = cbar_custom(varargin)
 %        default is [0 1]
 %  cbar_custom(...,'tickvals',[tick_position_vector])      
 %        default 11 ticks evenly spaced
+%  cbar_custom(...,'ticklabs',[tick_position_vector])      
+%        has to be the same number of elements as in the tickvals
+%        default 11 ticks evenly spaced
 %  cbar_custom(...,'cmap',colourmap)
 %        default is jet
 %  cbar_custom(...,'ncols',n_of_colour_bins)            
@@ -30,7 +33,9 @@ function [ hcb ] = cbar_custom(varargin)
 %        default is 10
 %  cbar_custom(...,'FontWeight',fwt)
 %        default is 'normal'
-%   cbar_custom(...,'interpreter',string)
+%  cbar_custom(...,'FontCol',fcl)
+%        default is 'k'
+%  cbar_custom(...,'interpreter',string)
 %        default is 'tex'
 %  cbar_custom(ax,...) 
 %       makes colorbar in the axes "ax", where this is a handle of the axes
@@ -61,9 +66,10 @@ cmap = jet;
 fsz = 12;
 fwt = 'normal';
 lw = 2;
+fcl = 'k';
 ftix = 0.15; %fraction of width of cbar to have labels centred
 vtick = linspace(Vmi,Vma,cscntick); % vector of values of ticks
-
+ticklab = [];
 
 %% read inputs
 iarg = 1;
@@ -88,7 +94,8 @@ while iarg <= length(varargin)
             if Vmi==Vma, error('Give separate minimum and maximum limits'), end
         case {'tickvals'}
             vtick = varargin{iarg+1};
-%             cscntick = length(vtick);
+        case {'ticklabs'}
+            ticklab = varargin{iarg+1};
         case {'cmap'}
             cmap = varargin{iarg+1};
         case {'ncols'}
@@ -105,7 +112,10 @@ while iarg <= length(varargin)
             if ~isnumeric(fsz), error('FontSize must be numeric'), end
         case {'fontweight'}
             fwt = varargin{iarg+1};
-            if ~isnumeric(fsz), error('FontWeight must be numeric'), end
+            if isnumeric(fwt), error('FontWeight must be string'), end
+        case {'fontcol'}
+            fcl = varargin{iarg+1};
+            if isnumeric(fcl), error('FontCol must be string'), end
         case {'linewidth'}
             lw = varargin{iarg+1};
             if ~isnumeric(fsz), error('LineWdith must be numeric'), end
@@ -115,6 +125,7 @@ while iarg <= length(varargin)
     iarg = iarg+2;
 end
 
+if isempty(ticklab), ticklab = num2str(vtick(:)); end
 
 %% calcs - calculate corner positions for each colour bin, depending on orientation
 cscv = linspace(Vmi,Vma,ncols+1); % vector of values at edges of colour bins
@@ -143,9 +154,9 @@ elseif strcmp(orie,'vertical')
     cscXv = repmat([cscXle cscXri],1,ncols); cscXv = cscXv(1:length(cscYv)); % vector of Y positions at edges of colour bins
     % ticks
     csctiYv = interp1(cscv,cscYv,vtick);
-    csctiXv = (mean([cscXle cscXri]) + tickside*dX*(0.5+ftix))  * ones(size(csctiYv));
+    csctiXv = (mean([cscXle cscXri]) + tickside*dX*(0.5+2*ftix))  * ones(size(csctiYv));
     % title
-    titX = mean([cscXle cscXri]) - tickside*dX*(0.5 + 4*ftix);
+    titX = mean([cscXle cscXri]) - tickside*dX*(0.5 + 6*ftix);
     titY = mean([cscYbo cscYto]) ;
     titrot = 90;
     % all strings
@@ -159,33 +170,34 @@ end
 
 
 %% draw
+hcb = hggroup;
 hold on
 %% colour bins
 for ii = 1:ncols
     xx = [cscXv(ii),cscXv(ii+1),cscXv(ii+1),cscXv(ii),cscXv(ii)];
     yy = [cscYv(ii),cscYv(ii),cscYv(ii+1),cscYv(ii+1),cscYv(ii)];
-    hp(ii) = patch(xx,yy,colour_get(mean(cscv(ii:ii+1)),Vma,Vmi,cmap)');
+    hp(ii) = patch(xx,yy,colour_get(mean(cscv(ii:ii+1)),Vma,Vmi,cmap)','Parent',hcb);
     set(hp,'LineStyle','none')
 end
 %% ticks and labels
 % labels
-text(csctiXv',csctiYv',num2str(vtick'),...
+text(csctiXv',csctiYv',ticklab,...
         'HorizontalAlignment',horizal,'VerticalAlignment',vertal,...
-        'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr)
+        'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
 % ticks
 if strcmp(orie,'horizontal')
-plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'k','LineWidth',lw/1.5)
-plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'k','LineWidth',lw/1.5)
+plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'k','LineWidth',lw/1.5,'Parent',hcb)
+plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'k','LineWidth',lw/1.5,'Parent',hcb)
 elseif strcmp(orie,'vertical')
-plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5)
-plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5)
+plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5,'Parent',hcb)
+plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5,'Parent',hcb)
 end
 %% title
 text(titX,titY,titlestr,...
         'HorizontalAlignment',tithorizal,'VerticalAlignment',titvertal,'rotation',titrot,...
-        'FontSize',1.3*fsz,'FontWeight',fwt,'interpreter',interpstr)
+        'FontSize',1.3*fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
 
-plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-k','LineWidth',lw)
+plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-k','LineWidth',lw,'Parent',hcb)
 
 hold off
 end

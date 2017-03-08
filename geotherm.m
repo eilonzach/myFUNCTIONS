@@ -14,7 +14,7 @@ function [ TempZ ] = geotherm( age,coolopt,Z,Tpot,kappa,dTdz_ad,Zplate  )
 %               [optional, default is 1300C]
 %    kappa   = thermal diffusivity (m^2/s)      
 %               [optional, default is 1e-6 m^2/s]
-%               NB does not include temperature-dependent conductivity etc.
+%               NB optionally include thermal dependence of diffusivity
 %    dTdz_ad = adiabatic temperature gradient (degrees C/km)
 %               [optional, default is 0.3 ?C/km]
 %    Zplate  = thickness of plate if using plate model (km)
@@ -60,7 +60,7 @@ if strcmp('halfspace',coolopt)
 
 % TempZ = T0 + (T1-T0)*erf(Z/(2*sqrt(kappa*t))); % T&C eqn. 4-125
 % shakes out as
-TempZ = Tad.*erf(Z/(2*sqrt(kappa*age)));
+TempZ = Tad.*erf(Z./(2*sqrt(kappa.*age)));
 
 elseif strcmp('plate',coolopt)
 

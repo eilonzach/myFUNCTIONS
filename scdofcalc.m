@@ -1,4 +1,4 @@
-function [dof,tim]=scdofcalc(xx,option)
+function [dof,samp_per_fp]=scdofcalc(xx,option)
 % [dof,tim]=scdofcalc(xx,option)
 % scdofcalc.m  calculate degrees of freedom a la Silver and Chan for a time
 % series xx or from a noise series XY filename
@@ -25,6 +25,6 @@ ee = sum(f2) - 0.5*(f2(1) + f2(nyq));
 e4 = sum(f4) - 0.5*(f4(1) + f4(nyq));
 
 dof =  2 * (2*ee*ee/e4 - 1)	;	% SC equation A12
-tim=(timeseries(length(timeseries),1) - timeseries(1,1))/dof;
-% fprintf(' %f degrees of freedom for %f seconds per free parameter\n',dof,tim);
+samp_per_fp=length(timeseries)/dof;
+% fprintf(' %f degrees of freedom for %f samples per free parameter\n',dof,tim);
 end

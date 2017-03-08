@@ -24,7 +24,7 @@ if strcmp(odir(end),'/')~=1
 end
 
 h = figure(fignumber);
-print(h,'-painters','-djpeg80','-r600',strcat(odir,filename))
+print(h,'-painters','-djpeg80','-r300',strcat(odir,filename))
 
 filepath = strcat(odir,filename,'.jpg');
 end

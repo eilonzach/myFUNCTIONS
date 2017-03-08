@@ -1,18 +1,25 @@
-function [filepath] = save2pdf(fignumber,filename,odir)
-% function [filepath] = save2pdf(fignumber,filename,odir)
+function [filepath] = save2pdf(fignumber,filename,odir,renderer)
+% function [filepath] = save2pdf(fignumber,filename,odir,renderer)
 % 
 % function to save a figure to a good-quality pdf
 %
 % INPUTS:
 % fignumber - (required) number of figure to save
 % filename - (optional, default is figN) name of saved file
-% odir - (optional, default is current dir) dir to save file in
+% odir - (optional, default is current dir) dir in which to save file
+% renderer (optional, default is -painters)
+% 
+% ZCE  7/2016
 
-if nargin < 3
+
+if nargin < 3 || isempty(fignumber)
     odir = pwd;
 end
-if nargin < 2
+if nargin < 2 || isempty(filename)
     filename = sprintf('fig%u',fignumber);
+end
+if nargin < 4 || isempty(renderer)
+    renderer = '-painters';
 end
 
 % thisdir = pwd;
@@ -55,7 +62,7 @@ end
 set(h,'PaperUnits','centimeters');
 set(h,'papersize',[wd ht]);
 set(h,'PaperPosition', [0 0 wd ht]);
-print(h,'-painters','-dpdf','-r200',strcat(odir,filename))
+print(h,renderer,'-dpdf','-r200',strcat(odir,filename))
 
 filepath = strcat(odir,filename);
 end

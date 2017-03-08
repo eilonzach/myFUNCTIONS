@@ -1,7 +1,8 @@
 function [ datZRT ] = zne2zrt( datZNE, baz )
 % [ datZRT ] = zne2zrt( datZNE, baz )
 %   Function to rotate traces from geographic coordinates (ZNE) to ray
-%   coordinates (ZRT)
+%   coordinates (ZRT), where T is positive to RIGHT if looking in ray
+%   propagation direction
 % 
 % INPUTS
 % datZNE    - a Nx3(2) matrix of seismogram traces in the order Z,N,E (N,E)
@@ -18,13 +19,13 @@ datZRT = zeros(size(datZNE));
 
 
 if size(datZNE,2)==1 % assume this is only Z
-fprintf(' !! only Z channel !! ')
-datZRT = datZNE;   
+    fprintf(' !! only Z channel !! ')
+    datZRT = datZNE;   
 elseif size(datZNE,2)==2 % only horiz components
-datZRT = datZNE*R';
+    datZRT = datZNE*R';
 elseif size(datZNE,2)==3 % 3-component
-datZRT(:,1) = datZNE(:,1);
-datZRT(:,2:3) = datZNE(:,2:3)*R';
+    datZRT(:,1) = datZNE(:,1);
+    datZRT(:,2:3) = datZNE(:,2:3)*R';
 end
 
 end

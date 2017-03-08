@@ -32,7 +32,8 @@ function [ind,t0,s0,t0close,s0close] = crossing(S,t,level,imeth)
 % brueckner@sbrs.net
 
 % check the number of input arguments
-error(nargchk(1,4,nargin));
+% error(nargchk(1,4,nargin));
+narginchk(1,4)
 
 % check the time vector input for consistency
 if nargin < 2 || isempty(t)
@@ -96,8 +97,10 @@ end
 % Addition:
 % Some people like to get the data points closest to the zero crossing,
 % so we return these as well
-[CC,II] = min(abs([S(ind-1) ; S(ind) ; S(ind+1)]),[],1); 
+if nargout>3
+[~,II] = min(abs([S(ind-1) ; S(ind) ; S(ind+1)]),[],1); 
 ind2 = ind + (II-2); %update indices 
 
 t0close = t(ind2);
 s0close = S(ind2);
+end
