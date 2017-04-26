@@ -2,12 +2,17 @@ function [ B ] = moving_average( A,n )
 %[ B ] = moving_average( A,n )
 % tapered, n-point moving average. 
 % n must be integer, and will be rounded up if even
+% 
+%   Z. Eilon,   March 2017
+
 if ~isodd(n)
     n = round_level(n,2)+1;
 end
 
+if isrow(A), A = A(:); end
+
 dy = 0.5*(n-1);
-L = length(A);
+L = size(A,1);
 
 % mid full moving average section
 C = toeplitz([1,zeros(1,L-n)],[ones(1,n),zeros(1,L-n)]);
