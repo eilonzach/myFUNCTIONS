@@ -10,7 +10,7 @@ B = zeros(1,size(A,2));
 ind = zeros(1,size(A,2));
 for ii = 1:size(A,2)
     B(ii) = unique(A(abA(:,ii)==mabA(ii),ii));
-    ind(ii) = find(A==B(ii),1,'first');
+    ind(ii) = find(A(:,ii)==B(ii),1,'first');
 end
 
 

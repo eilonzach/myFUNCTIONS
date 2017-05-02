@@ -5,7 +5,7 @@ function win = flat_hanning_taper(vec_t,tapertime)
 %     tapertime = amount of time ON EACH END to taper over
 % OUTPUTS:
 %     win       = window ramping up from 0 to 1 over tapertime, flat
-%                 in the middle, ramping down overe tapertime at the end
+%                 in the middle, ramping down over tapertime at the end
 
 win=ones(size(vec_t));
 

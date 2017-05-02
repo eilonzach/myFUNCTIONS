@@ -75,7 +75,7 @@ ticklab = [];
 iarg = 1;
 while iarg <= length(varargin)
     if iarg==1,
-        if isnumeric(varargin{iarg})
+        if isnumeric(varargin{iarg}) || ishghandle(varargin{iarg})
             axes(varargin{iarg});
             iarg = iarg+1;
             continue
