@@ -27,16 +27,16 @@ end
 if nargin < 3 || isempty(xfrac)
     xfrac = 0.1;
 end
-if nargin < 3 || isempty(yfrac)
+if nargin < 4 || isempty(yfrac)
     yfrac = 0.05;
 end
-if nargin < 4 || isempty(fontsz)
+if nargin < 5 || isempty(fontsz)
     fontsz = 22;
 end
-if nargin < 5 || isempty(interp)
+if nargin < 6 || isempty(interp)
     interp = 'latex';
 end
-if nargin < 6 || isempty(fontwt)
+if nargin < 7 || isempty(fontwt)
     fontwt = 'bold';
 end
 
