@@ -53,6 +53,8 @@ end
 ypos = title_y;
 xpos = title_x;
 
+if strcmp(interpreter,'latex'), title_string = regexprep(title_string,'_','\\_'); end
+
 ax99 = axes('pos',[0 0 1 1]);
 set(ax99,'visible','off')
 if strcmp(interpreter,'latex') && strcmp(fontweight,'bold')
