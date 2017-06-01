@@ -1,5 +1,5 @@
-function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,filtopt )
-%[ datf ] = filt_quick( dat,fmin,fmax,dt,npoles,filtopt )
+function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,filtopt )
+%[ datf ] = filt_quick( dat,fmin,fmax,dt,npoles,Npass,filtopt )
 %   quick function to filter a trace (dat is Nx1 vector) or a set of traces
 %   (dat is NxM matrix)
 % 
@@ -9,6 +9,8 @@ function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,filtopt )
 %  low-f corner. 
 %  if both frequencies are outside of the ffund-fNyq range, then will just
 %  return the data. 
+%
+%  Npass is the number 
 
 if nargin<4
     dt = 1;
@@ -17,6 +19,9 @@ if nargin < 5
     npoles = 2;
 end
 if nargin < 6
+    Npass = 2; % 
+end
+if nargin < 7
     filtopt = 'butter';
 end
 
@@ -51,8 +56,14 @@ datf = zeros(size(dat));
 for ii = 1:size(dat,2)
     % pad
     dat_pad = [zeros(1000,1);dat(:,ii);zeros(1000,1)];
+    
     % filter
-    dat_padf=filtfilt(bb, aa, dat_pad);
+    if Npass==1 % one-pass filter, causal, preserve shape
+        dat_padf=filter(bb, aa, dat_pad);
+    elseif Npass==2 % two-pass, filter, non-causal (zero-phase), shape affected
+        dat_padf=filtfilt(bb, aa, dat_pad);
+    end
+    
     % unpad, store
     datf(:,ii) = dat_padf(1001:end-1000);
 end
