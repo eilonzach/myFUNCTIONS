@@ -4,6 +4,13 @@ function [ B,ind ] = maxab( A )
 %   column, if A is a matrix. This will be the largest absolute value,
 %   irrespective if that is negative or positive
 
+if all(isnan(A)), 
+    B = nan; ind = [];
+    return
+end
+
+if isrow(A), A = A(:); end
+
 mabA = max(abs(A));
 abA = abs(A);
 B = zeros(1,size(A,2));
