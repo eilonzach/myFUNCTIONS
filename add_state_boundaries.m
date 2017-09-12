@@ -1,5 +1,5 @@
-function add_state_boundaries(ax,latlims,lonlims,col)
-% add_state_boundaries(ax,latlims,lonlims,colour)
+function h = add_state_boundaries(ax,latlims,lonlims,col)
+% h = add_state_boundaries(ax,latlims,lonlims,colour)
 %   function to plot light grey state boundaries on maps
 
 if nargin ==0 || isempty(ax)
@@ -26,7 +26,7 @@ lonlims = lonlims(:); % make column
 states = shaperead('usastatehi','UseGeoCoords', true, 'BoundingBox', [lonlims,latlims]);
 
 hrat = get(gca,'DataAspectRatio');
-geoshow(ax, states, 'Edgecolor', col,'linestyle','-','facecolor','none')
+h = geoshow(ax, states, 'Edgecolor', col,'linestyle','-','facecolor','none','linewidth',2);
 set(gca,'DataAspectRatio',hrat);
 
 

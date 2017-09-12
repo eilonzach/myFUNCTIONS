@@ -12,7 +12,7 @@ function [filepath] = save2pdf(fignumber,filename,odir,renderer)
 % ZCE  7/2016
 
 
-if nargin < 3 || isempty(fignumber)
+if nargin < 3 || isempty(odir)
     odir = pwd;
 end
 if nargin < 2 || isempty(filename)
@@ -62,6 +62,7 @@ end
 set(h,'PaperUnits','centimeters');
 set(h,'papersize',[wd ht]);
 set(h,'PaperPosition', [0 0 wd ht]);
+
 print(h,renderer,'-dpdf','-r200',strcat(odir,filename))
 
 filepath = strcat(odir,filename);

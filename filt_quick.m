@@ -1,4 +1,4 @@
-function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,filtopt )
+function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,dirpass,filtopt )
 %[ datf ] = filt_quick( dat,fmin,fmax,dt,npoles,Npass,filtopt )
 %   quick function to filter a trace (dat is Nx1 vector) or a set of traces
 %   (dat is NxM matrix)
@@ -22,6 +22,9 @@ if nargin < 6
     Npass = 2; % 
 end
 if nargin < 7
+    dirpass = 1; % direction to run the filter if causal (forward = +1, backward = -1)
+end
+if nargin < 8
     filtopt = 'butter';
 end
 
@@ -57,6 +60,8 @@ for ii = 1:size(dat,2)
     % pad
     dat_pad = [zeros(1000,1);dat(:,ii);zeros(1000,1)];
     
+    if dirpass == -1, dat_pad = flipud(dat_pad); end
+    
     % filter
     if Npass==1 % one-pass filter, causal, preserve shape
         dat_padf=filter(bb, aa, dat_pad);
@@ -64,6 +69,8 @@ for ii = 1:size(dat,2)
         dat_padf=filtfilt(bb, aa, dat_pad);
     end
     
+    if dirpass == -1, dat_padf = flipud(dat_padf); end
+
     % unpad, store
     datf(:,ii) = dat_padf(1001:end-1000);
 end

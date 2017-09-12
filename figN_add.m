@@ -1,5 +1,5 @@
-function h = figN_add(figN,ax,xfrac,yfrac,fontsz,interp,fontwt )
-% h = figN_add(figN,ax,xfrac,yfrac,fontsz,interp,fontwt )
+function h = figN_add(figN,ax,xfrac,yfrac,fontsz,interp,fontwt,rotang,colour )
+% h = figN_add(figN,ax,xfrac,yfrac,fontsz,interp,fontwt,rotang,colour )
 % 
 % Function to add a figure number or annotation to an axes
 %
@@ -17,9 +17,15 @@ function h = figN_add(figN,ax,xfrac,yfrac,fontsz,interp,fontwt )
 %             (default is latex)
 %   fontwt  - weight of font 
 %             (default is bold)
+%   rotang  - rotation of the text 
+%             (default is 0)
+%   colour  - colour of the text 
+%             (default is 0)
 % 
 % OUTPUT:
 %   h       - graphics handle to the added text object
+% 
+% Z. Eilon, May 2017
 
 if nargin < 2 || isempty(ax)
     ax = gca;
@@ -39,6 +45,13 @@ end
 if nargin < 7 || isempty(fontwt)
     fontwt = 'bold';
 end
+if nargin < 8 || isempty(rotang)
+    rotang = 0;
+end
+if nargin < 9 || isempty(colour)
+    colour = 'k';
+end
+
 
 %% start
 
@@ -58,8 +71,8 @@ if strcmp(interp,'latex') && strcmp(fontwt,'bold')
 end
 
 h = text(ax,xl,yb,figNstr,...
-     'fontsize',fontsz,'interpreter',interp,'fontweight',fontwt,...
-     'horizontalalignment','left','verticalalignment','bottom');
+     'fontsize',fontsz,'interpreter',interp,'fontweight',fontwt,'color',colour,...
+     'horizontalalignment','left','verticalalignment','bottom','rotation',rotang);
 
 end
 
