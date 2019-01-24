@@ -7,7 +7,7 @@ function [ m,b,mstd,bstd,m_upper,m_lower ] = fit_LSqEr( X,Y,b0opt,normopt,mprior
 % Expand in future to do F-test on grid search to estimate uncertainties to
 % the fit, and to add options for L1 norm instead of L2 norm
 
-if nargin<3 isempty(b0opt)
+if nargin<3 || isempty(b0opt)
     b0opt = 1; %option to pin b to zero
 end
 if nargin<4 || isempty(normopt)

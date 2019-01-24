@@ -63,9 +63,9 @@ for ii = 1:size(dat,2)
     if dirpass == -1, dat_pad = flipud(dat_pad); end
     
     % filter
-    if Npass==1 % one-pass filter, causal, preserve shape
+    if Npass==1 % one-pass filter, causal, shape affected (dispersed)
         dat_padf=filter(bb, aa, dat_pad);
-    elseif Npass==2 % two-pass, filter, non-causal (zero-phase), shape affected
+    elseif Npass==2 % two-pass, filter, non-causal (zero-phase), shape preserved
         dat_padf=filtfilt(bb, aa, dat_pad);
     end
     
