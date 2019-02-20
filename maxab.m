@@ -4,7 +4,7 @@ function [ B,ind ] = maxab( A )
 %   column, if A is a matrix. This will be the largest absolute value,
 %   irrespective if that is negative or positive
 
-if all(isnan(A)), 
+if all(isnan(A))
     B = nan; ind = [];
     return
 end
