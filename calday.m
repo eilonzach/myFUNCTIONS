@@ -88,5 +88,10 @@ if nargin==3
         return
     end
 end
+
+
+if nargout<2
+    MM = [MM,DD];
 end
 
+end

@@ -32,5 +32,8 @@ setpref('Internet','SMTP_Server',outgoing_smtp_server);
 setpref('Internet','SMTP_Username',email_address);
 setpref('Internet','SMTP_Password',password);
 % Send test email
+end
+
 sendmail(email_address, 'Test', 'Msg from MATLAB');
+
 end

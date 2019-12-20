@@ -1,4 +1,5 @@
 function win = flat_hanning_taper(vec_t,tapertime)
+% win = flat_hanning_taper(vec_t,tapertime)
 % function to create a box-car window with a hanning taper end.
 % INPUTS:
 %     vec_t     = Nx1 vector of input times, equally spaced by dt

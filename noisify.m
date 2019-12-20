@@ -11,7 +11,7 @@ function [ odat,SNRest,dofps ] = noisify( idat,ndat,idt,ndt,SNR,plotopt )
 % ndat     - time series of noisy data in columns (e.g. 3 channels would be
 %              an nsamps x 3 matrix). Noise window should have no arrival. 
 % idt      - dt of input time series (samples per second)
-% idt      - dt of noise time series (samples per second)
+% ndt      - dt of noise time series (samples per second)
 % SNR      - signal to noise ratio desired (defined as maximum over 2*noiseRMS)
 % plotopt  - 1 to plot, anything else will not.
 % 
@@ -29,7 +29,7 @@ end
 noise=1./SNR;
 nsamps=size(idat,1); 
 nchans=size(idat,2);
-if size(ndat,1)>=nsamps
+if size(ndat,1)>nsamps
     error('Make idat and ndat the same size!')
 end
 
@@ -90,21 +90,22 @@ FF=(noise*FA + FB);
 
 %ifft to get data:
 odat=zeros(nsamps,3);
+samplength = nsamps*idt;
 for ic=1:nchans
     odat(:,ic)=ifft(FF(:,ic));
     if plotopt==1
     figure(13);
 	A = max(max(idat));
-    subplot(nchans,2,2*ic); plot([0:ndt:samplength-ndt],odat(:,ic));
+    subplot(nchans,2,2*ic); plot([0:idt:samplength-idt],odat(:,ic));
     ylim([-A  A])
-    subplot(nchans,2,2*ic-1); plot([0:ndt:samplength-ndt],idat(:,ic));
+    subplot(nchans,2,2*ic-1); plot([0:idt:samplength-idt],idat(:,ic));
     ylim([-A  A])
     ylabel(sprintf('Component %u',ic));
     end
 end
 
 %% IF POSS, UNSPLIT AND MEASURE SIGNAL TO NOISE
-if nargin > 5
+if nargin > 6
     
 % filter NB THIS MIGHT NEED TO BE CHANGED DEPENDING ON THE NOISE 
 [b,a]  = butter(3, 2*[0.02 0.125]*idt);

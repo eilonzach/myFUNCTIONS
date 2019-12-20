@@ -9,6 +9,8 @@ function [ datZYX_ ] = rot_traces( datZYX, theta )
 % 
 % OUTPUTS
 % datZYX_    - Nx3(2) matrix of seismogram traces in the order Z,Y',X' (Y,X)
+% 
+% Z. Eilon 2012
 
 R = [cosd(theta) sind(theta); -sind(theta) cosd(theta)]; %Rotation matrix
 

@@ -1,5 +1,5 @@
 function [ datPSVSH ] = zrt2psvsh( datZRT, a, B, p, zsgn )
-% [ datPSVSH ] = zrt2psvsh( datZRT, a, B, phi, zsgn )
+% [ datPSVSH ] = zrt2psvsh( datZRT, a, B, p, zsgn )
 %   Function to transform Z-R-T seismogram components into P-SV-SH using
 %   free-surface transfer matrix (Kennett, 1991) from Abt et al 2010
 % INPUTS:
