@@ -4,8 +4,8 @@ function [maxA,x,y] = maxgrid(A)
 %MxN matrix, e.g. an error grid where:
 % x is the column number of the maximum - the x coordinate
 % y is the row number of the maximum - the y coordinate
-[~,x]=max(max(A));
-[maxA,y]=(max(A(:,x)));
-maxA;
+    [~,x]=max(max(A));
+    [maxA,y]=(max(A(:,x)));
+    maxA;
 
 end

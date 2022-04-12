@@ -7,20 +7,23 @@ function x = axlim(ax,val)
 %       x = lims(val)
 %  This is to allow one-line operations on the axes dimensions.
 
-if nargin < 2
-    val = [];
+    if nargin < 2
+        val = [];
+    end
+
+    if ~ishandle(ax)
+        val = ax;
+        ax = gca;
+    end
+
+    lims = axis(ax);
+
+    if isempty(val)
+        val = 1:length(lims);
+    end
+
+    x = lims(val);
+
 end
 
-if ~ishandle(ax)
-    val = ax;
-    ax = gca;
-end
 
-lims = axis(ax);
-
-if isempty(val)
-    val = 1:length(lims);
-end
-
-x = lims(val);
-end

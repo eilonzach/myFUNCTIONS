@@ -1,7 +1,7 @@
-function [ KMLEN, AZ ] = distance_km(LAT1,LON1,LAT2,LON2)
-%[ KMLEN, AZ ] = distance_km(LAT1,LON1,LAT2,LON2)
+function [ LEN, AZ ] = distance_deg_nomap(LAT1,LON1,LAT2,LON2)
+%[ LEN, AZ ] = distance_km(LAT1,LON1,LAT2,LON2)
 %   This is just the distance function but with the Earth's ellipsoid input
-%   by defult, such that the distance output is in km.
+%   by defult, such that the distance output is in deg.
 %   usage distance_km([LAT1,LON1],[LAT2,LON2]) is also ok
 % 
 % Written by Zach Eilon, 2013
@@ -15,8 +15,9 @@ if nargin==2 % if the input is actually distance_km([LAT1,LON1],[LAT2,LON2])
     LON2 = P2(2);  
 end
 
-[KMLEN,AZ] = distance(LAT1,LON1,LAT2,LON2,[6378.137, 0.08181919]);
-
+[KMLEN,AZ] = vdist(LAT1,LON1,LAT2,LON2);
+LEN = KMLEN/((6371*2*pi)/360);
 
 
 end
+

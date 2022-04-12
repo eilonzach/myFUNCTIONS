@@ -104,3 +104,5 @@ ind2 = ind + (II-2); %update indices
 t0close = t(ind2);
 s0close = S(ind2);
 end
+
+end

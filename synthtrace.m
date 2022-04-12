@@ -50,4 +50,3 @@ startind = max([round(nsamps*startfraction),1]);
 xx(startind : startind + nsampsw) = amp * yy; 
 
 end
-

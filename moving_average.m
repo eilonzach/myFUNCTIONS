@@ -35,12 +35,19 @@ end
 %complete moving average filter (not normalised)
 G = [D;C;rot90(D,2)];
 
+% account for nans
+anan = isnan(A);
+A0 = A; A(anan)=0; % set nans to 0
+G(:,anan) = 0; % no weight here in average
+
 % do in right direction!
 if dim == 1
     B = G*A./sum(G,2); % multiply and normalise
 elseif dim == 2
     B = [G*A'./sum(G,2)]'; % multiply and normalise
 end
+
+B(anan) = nan;
 
 
 end

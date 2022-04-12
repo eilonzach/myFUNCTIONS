@@ -6,4 +6,3 @@ function [ xx ] = ceil_level( x, y )
 
 xx = ceil(x./y).*y;
 end
-

@@ -12,11 +12,14 @@ function [filepath] = save2jpg(fignumber,filename,odir,renderer)
 % ZCE  7/2016
 
 
-if nargin < 3 || isempty(odir)
-    odir = pwd;
-end
+
 if nargin < 2 || isempty(filename)
     filename = sprintf('fig%u',fignumber);
+end
+if nargin < 3 || isempty(fignumber)
+    odir = pwd;
+    % don't give an odir if it is implicit in the filename!
+    if any(strcmp(filename(1),{'~','.','/'})) || any(filename=='/'), odir = ''; end
 end
 if nargin < 4 || isempty(renderer)
     renderer = '-painters';
@@ -26,7 +29,7 @@ end
 % odir = cd(odir);
 % cd(thisdir)
 
-if strcmp(odir(end),'/')~=1
+if ~isempty(odir) && strcmp(odir(end),'/')~=1
     odir = strcat(odir,'/');
 end
 

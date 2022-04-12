@@ -16,9 +16,9 @@ function [ minX_ind ] = mindex( X,a )
 %       Y(mindex(X)) or Y(mindex(X,a))
 
 if nargin<2
-[~,minX_ind] = min(X);
+    [~,minX_ind] = min(X);
 else
-[~,minX_ind] = min(abs(X-a));
-end
+    [~,minX_ind] = min(abs(X-a));
 end
 
+end

@@ -29,4 +29,3 @@ elseif size(datZNE,2)==3 % 3-component
 end
 
 end
-

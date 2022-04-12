@@ -24,4 +24,3 @@ YI(XI==olap(i)) = mean(Y(X==olap(i)));
 end
 
 end
-

@@ -1,5 +1,5 @@
-function [ m,b,mstd,bstd,m_upper,m_lower ] = fit_LSqEr( X,Y,b0opt,normopt,mprior,bprior,xwt,ywt )
-%[ m,b,mstd,bstd,m_upper,m_lower ] = fit_LSqEr( X,Y,b0opt=1,normopt=2,mprior,bprior,xwt,ywt )
+function [ m,b,mstd,bstd,m_upper,m_lower,misfit_best ] = fit_LSqEr( X,Y,b0opt,normopt,mprior,bprior,xwt,ywt )
+%[ m,b,mstd,bstd,m_upper,m_lower,misfit_best ] = fit_LSqEr( X,Y,b0opt=1,normopt=2,mprior,bprior,xwt,ywt )
 %   function to fit a straight line to X,Y data where there is error in
 %   both data by grid searching to find the line that gives the minimum
 %   squared misfit in both dimensions with a line equation y = m*x + b

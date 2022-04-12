@@ -9,4 +9,3 @@ if nargin==1
     [minA,y]=(min(A(:,x)));
 end
 end
-

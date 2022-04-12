@@ -35,6 +35,8 @@ function [ hcb ] = cbar_custom(varargin)
 %        default is 'normal'
 %  cbar_custom(...,'FontCol',fcl)
 %        default is 'k'
+%  cbar_custom(...,'LineCol',lcl)
+%        default is 'k'
 %  cbar_custom(...,'interpreter',string)
 %        default is 'tex'
 %  cbar_custom(ax,...) 
@@ -67,6 +69,7 @@ fsz = 12;
 fwt = 'normal';
 lw = 2;
 fcl = 'k';
+lcl = 'k';
 ftix = 0.15; %fraction of width of cbar to have labels centred
 vtick = linspace(Vmi,Vma,cscntick); % vector of values of ticks
 ticklab = [];
@@ -115,7 +118,8 @@ while iarg <= length(varargin)
             if isnumeric(fwt), error('FontWeight must be string'), end
         case {'fontcol'}
             fcl = varargin{iarg+1};
-            if isnumeric(fcl), error('FontCol must be string'), end
+        case {'linecol'}
+            lcl = varargin{iarg+1};
         case {'linewidth'}
             lw = varargin{iarg+1};
             if ~isnumeric(fsz), error('LineWdith must be numeric'), end
@@ -181,23 +185,25 @@ for ii = 1:ncols
 end
 %% ticks and labels
 % labels
-text(csctiXv',csctiYv',ticklab,...
+for itl = 1:length(ticklab)
+text(csctiXv(itl)',csctiYv(itl)',regexprep(ticklab(itl,:),' ',''),...
         'HorizontalAlignment',horizal,'VerticalAlignment',vertal,...
         'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
+end
 % ticks
 if strcmp(orie,'horizontal')
-plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'k','LineWidth',lw/1.5,'Parent',hcb)
-plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'k','LineWidth',lw/1.5,'Parent',hcb)
+plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
+plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
 elseif strcmp(orie,'vertical')
-plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5,'Parent',hcb)
-plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'k','LineWidth',lw/1.5,'Parent',hcb)
+plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
+plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
 end
 %% title
 text(titX,titY,titlestr,...
         'HorizontalAlignment',tithorizal,'VerticalAlignment',titvertal,'rotation',titrot,...
         'FontSize',1.3*fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
 
-plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-k','LineWidth',lw,'Parent',hcb)
+plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-','LineWidth',lw,'Parent',hcb,'color',lcl)
 
 hold off
 end

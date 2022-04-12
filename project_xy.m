@@ -108,5 +108,3 @@ truefalse = ~isstruct(par.map_proj) && strcmpi('naive',par.map_proj);
 function truefalse = ismaptoolbox( par )
 
 truefalse = isstruct(par.map_proj) && isfield(par.map_proj,'mapprojection');
-
-

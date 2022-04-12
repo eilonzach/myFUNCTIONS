@@ -24,4 +24,3 @@ C = cross(A,B);
 distance = -C(:,3)/norm(Q2-Q1);
 
 end
-

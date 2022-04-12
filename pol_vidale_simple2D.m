@@ -29,4 +29,3 @@ polest = r2d(polest);
 polstrength = 1 - min(D)/max(D);
 
 end
-

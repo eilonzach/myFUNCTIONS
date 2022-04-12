@@ -44,3 +44,5 @@ end
 % Section 2: Compute RMS value of x.
 
 RMS= sqrt (mean (x .^2) );
+
+end
