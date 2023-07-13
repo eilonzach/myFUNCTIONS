@@ -5,6 +5,8 @@ function y_ = rm_intercept(y,x,wts)
 % if no x values, assume x = 0:length(y)-1; Can weight data by wts.
 
 y = y(:); % ensure column. 
+x = x(:); % ensure column. 
+wts = wts(:); % ensure column.
 N = length(y);
 
 if nargin < 2 || isempty(x)

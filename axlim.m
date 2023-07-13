@@ -16,7 +16,12 @@ function x = axlim(ax,val)
         ax = gca;
     end
 
-    lims = axis(ax);
+    try
+        lims = axis(ax);
+    catch % note will fail if different limit types
+        lims = {xlim(ax),ylim(ax)};
+        warning('NOTE x and y have different data types. Storing in separate elements of cell')
+    end
 
     if isempty(val)
         val = 1:length(lims);

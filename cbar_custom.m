@@ -185,7 +185,7 @@ for ii = 1:ncols
 end
 %% ticks and labels
 % labels
-for itl = 1:length(ticklab)
+for itl = 1:size(ticklab,1)
 text(csctiXv(itl)',csctiYv(itl)',regexprep(ticklab(itl,:),' ',''),...
         'HorizontalAlignment',horizal,'VerticalAlignment',vertal,...
         'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)

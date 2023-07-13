@@ -5,6 +5,16 @@ function [ h ] = title_custom( title_string,title_y,title_x, varargin )
 %  title_custom('titstring',Name,Value...)
 %  title_custom('titstring',title_y,Name,Value...)
 %  title_custom('titstring',title_y,title_x,Name,Value...)
+%
+%  Defaults:
+%     ypos = 0.95;
+%     xpos = 0.5;
+%     fontsize = 20;
+%     interpreter = 'latex';
+%     fontweight = 'bold';
+%     horal = 'center';
+%     veral = 'middle';
+%     keepunderscore = false;
 
 % defaults
 ypos = 0.95;
@@ -14,9 +24,10 @@ interpreter = 'latex';
 fontweight = 'bold';
 horal = 'center';
 veral = 'middle';
+keepunderscore = false;
 
 
-if nargin<2, 
+if nargin<2 
     title_x = xpos;
     title_y = ypos;
 end
@@ -33,7 +44,7 @@ if nargin>=3
         title_x = xpos;
     end
     if rem(length(varargin),2)~=0, error('need even # of varargin'); end
-    for iv = 1:length(varargin)/2;
+    for iv = 1:length(varargin)/2
         switch varargin{2*iv-1}
             case 'fontsize'
                 fontsize = varargin{2*iv};
@@ -45,6 +56,8 @@ if nargin>=3
                 horal = varargin{2*iv};
             case 'varticalalignment'
                 veral = varargin{2*iv};
+            case 'keepunderscore'
+                keepunderscore = varargin{2*iv};
         end
     end
         
@@ -53,7 +66,11 @@ end
 ypos = title_y;
 xpos = title_x;
 
-if strcmp(interpreter,'latex'), title_string = regexprep(title_string,'_','\\_'); end
+if strcmp(interpreter,'latex')
+    if keepunderscore
+        title_string = regexprep(title_string,'_','\\_'); 
+    end
+end
 
 ax99 = axes('pos',[0 0 1 1]);
 set(ax99,'visible','off')
