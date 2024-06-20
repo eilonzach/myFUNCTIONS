@@ -56,4 +56,9 @@ end
 
 rgbs = squeeze(rgbs);
 
+% in case it squeezes it into a 3x1 column vector
+if size(rgbs,2) < 3
+    rgbs = rgbs';
+end
+
 end

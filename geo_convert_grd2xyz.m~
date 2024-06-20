@@ -1,0 +1,50 @@
+function laloz = UTM2lalo(enz,lon_zone,hemi)
+% ofile = UTM2lalo(ifile,zone,hemi)
+%
+% Function to convert UTM* coordinates into geographic coordinates
+% 
+% INPUTS:
+%   1) an .xyz file or matrix with two(three) columns:  
+%      Easting, Northing, (and Depth), with E and N  in UTM* coordinates
+%   2) the longitudinal zone, either as a string (with optional
+%      Latitude band, eg. '32H') or as a decimal value equal to the centre
+%      longitude of the data (from which  function will compute the zone)
+%   3) Hemisphere, 'N'|'North'|+1 or 'S'|'South'|-1. Default is N.
+% 
+% OUTPUTS:
+%     a .lalo(z) file or a [lat lon (z)] matrix, depending on input type
+% 
+% 
+%  * Universtal Transverse Mercator system
+%  https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
+% 
+%  Z. Eilon 3/2021
+
+if ischar(enz) % input is a file
+    otype = 'file';
+    ifile = enz;
+    enz = load(ifile);
+else
+    otype = 'matrix';
+end
+
+if size(enz,2) < 1 || size(enz,2) > 4
+    error('This file does not appear to have 2 or 3 columns')
+end
+
+if ischar(lon_zone) % lon zone is a code
+    % convert from string with numbers in code
+    try % first assume code is two character number + 1 char letter (which we ignore)
+        lonzone = eval(lon_zone(1:2));
+    catch % ok so maybe code is 1 character number + 1 char letter (which we ignore)
+        lonzone = eval(lon_zone(1));
+    end
+    lon0 = lonzone*6 - 183;
+else % lon zone is a longitude value of the centre of the array
+    % need to round to centre of bin
+    lon0 = (fix(mod(lon+180,360)/6)+1)*6 - 183
+    
+end
+
+
+
