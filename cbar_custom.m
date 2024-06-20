@@ -101,6 +101,7 @@ while iarg <= length(varargin)
             ticklab = varargin{iarg+1};
         case {'cmap'}
             cmap = varargin{iarg+1};
+            if size(cmap,2)>size(cmap,1), cmap = cmap'; end % need colours in rows
         case {'ncols'}
             ncols = varargin{iarg+1};
         case {'tickside'}
@@ -180,7 +181,7 @@ hold on
 for ii = 1:ncols
     xx = [cscXv(ii),cscXv(ii+1),cscXv(ii+1),cscXv(ii),cscXv(ii)];
     yy = [cscYv(ii),cscYv(ii),cscYv(ii+1),cscYv(ii+1),cscYv(ii)];
-    hp(ii) = patch(xx,yy,colour_get(mean(cscv(ii:ii+1)),Vma,Vmi,cmap)','Parent',hcb);
+    hp(ii) = patch(xx,yy,colour_get(mean(cscv(ii:ii+1)),Vma,Vmi,cmap),'Parent',hcb);
     set(hp,'LineStyle','none')
 end
 %% ticks and labels

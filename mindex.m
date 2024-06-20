@@ -3,7 +3,7 @@ function [ minX_ind ] = mindex( X,a )
 %   simple function to return the index of the minimum point in vector X
 %   
 %   if a second argument is given, the function outputs the index of the
-%   point in X closest to the water level, a
+%   point in X closest to the water level, "a"
 %   basically just outputs the second output of the "min" function,
 %   without giving you the magnitude of the minimum value.
 % 
@@ -14,6 +14,7 @@ function [ minX_ind ] = mindex( X,a )
 %       Y(find(X==min(X)) or, more often, Y(find((X-a)==min(X-a)))
 %   Instead, can now use
 %       Y(mindex(X)) or Y(mindex(X,a))
+%   See also maxdex.m
 
 if nargin<2
     [~,minX_ind] = min(X);
