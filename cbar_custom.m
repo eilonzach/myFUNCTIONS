@@ -50,7 +50,10 @@ function [ hcb ] = cbar_custom(varargin)
 
 %% defaults
 % location in SW, horizontal, ticks below
-axlim = axis;
+% axlim = axis;
+ax = gca;
+axlim = [ax.XLim,ax.YLim]; % should be a lot faster
+
 cscXle = axlim(1) + 0.05*diff(axlim(1:2)); % 5% of way from left 
 cscXri = axlim(1) + 0.5*diff(axlim(1:2)); % 20% of way from left 
 cscYbo = axlim(3) + 0.05*diff(axlim(3:4)); % 5% of way from bottom 
@@ -77,7 +80,7 @@ ticklab = [];
 %% read inputs
 iarg = 1;
 while iarg <= length(varargin)
-    if iarg==1,
+    if iarg==1
         if isnumeric(varargin{iarg}) || ishghandle(varargin{iarg})
             axes(varargin{iarg});
             iarg = iarg+1;

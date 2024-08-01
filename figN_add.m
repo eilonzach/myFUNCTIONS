@@ -56,7 +56,8 @@ end
 %% start
 
 % position for the text
-alims = axis(ax);
+% alims = axis(ax);
+alims = [ax.XLim,ax.YLim]; % should be a lot faster
 xl = alims(1) + xfrac*diff(alims(1:2));
 yb = alims(3) + yfrac*diff(alims(3:4));
 % flip if the axes are going the other way
