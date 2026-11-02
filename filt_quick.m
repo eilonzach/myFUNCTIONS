@@ -1,7 +1,7 @@
 function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,dirpass,filtopt )
-%[ datf ] = filt_quick( dat,fmin,fmax,dt,npoles,Npass,filtopt )
+%[ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,dirpass,filtopt )
 %   quick function to filter a trace (dat is Nx1 vector) or a set of traces
-%   (dat is NxM matrix)
+%   (dat is NxM matrix). Keep all frequencies between flo and fhi.
 % 
 %  if flo < ffund (fundamental freq = 1./T, where T is time series total
 %  length) then this will apply a low pass using the high-f corner. 
@@ -10,7 +10,9 @@ function [ datf ] = filt_quick( dat,flo,fhi,dt,npoles,Npass,dirpass,filtopt )
 %  if both frequencies are outside of the ffund-fNyq range, then will just
 %  return the data. 
 %
-%  Npass is the number 
+%  Npass is the number of passes, 2 by default for acausal.
+%  dirpass is the direction of the pass if just one pass, forward (+1) by
+%  default, but can be backward (-1) also.
 
 if nargin<4
     dt = 1;
@@ -60,7 +62,8 @@ for ii = 1:size(dat,2)
     % pad
     dat_pad = [zeros(1000,1);dat(:,ii);zeros(1000,1)];
     
-    if dirpass == -1, dat_pad = flipud(dat_pad); end
+
+    if dirpass == -1 && Npass == 1 , dat_pad = flipud(dat_pad); end
     
     % filter
     if Npass==1 % one-pass filter, causal, shape affected (dispersed)
@@ -69,7 +72,7 @@ for ii = 1:size(dat,2)
         dat_padf=filtfilt(bb, aa, dat_pad);
     end
     
-    if dirpass == -1, dat_padf = flipud(dat_padf); end
+    if dirpass == -1 && Npass == 1 , dat_padf = flipud(dat_padf); end
 
     % unpad, store
     datf(:,ii) = dat_padf(1001:end-1000);

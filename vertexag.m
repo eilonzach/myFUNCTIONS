@@ -4,6 +4,8 @@ function [ Vfac ] = vertexag( ax )
 % function to compute the vertical exaggeration by empirically comparing
 % the vertical pixels (Y) vs. horizontal pixels (X) to 
 % the vertical scale  (y) vs. horizontal scale  (x).
+% 
+% see also plot_size_ratio
 
 if nargin < 1 || isempty(ax)
     ax = gca;

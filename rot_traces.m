@@ -1,7 +1,8 @@
 function [ datZYX_ ] = rot_traces( datZYX, theta )
 % [ datZYX_ ] = rot_traces( datZYX, theta )
 %   Function to rotate traces from right handed coordinates (ZYX) to new
-%   right handed coordinates (ZY'X') where Z is positive downwards
+%   right handed coordinates (ZY'X') where Z is positive downwards. Theta
+%   in degrees. often Y will be "North" and X will be "East".
 % 
 % INPUTS
 % datZYX    - Nx3(2) matrix of seismogram traces in the order Z,Y,X (Y,X)

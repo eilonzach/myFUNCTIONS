@@ -134,6 +134,8 @@ while iarg <= length(varargin)
 end
 
 if isempty(ticklab), ticklab = num2str(vtick(:)); end
+% columnise ticklabels if a vector
+if isvector(ticklab), ticklab = ticklab(:); end
 
 %% calcs - calculate corner positions for each colour bin, depending on orientation
 cscv = linspace(Vmi,Vma,ncols+1); % vector of values at edges of colour bins
@@ -178,7 +180,8 @@ end
 
 
 %% draw
-hcb = hggroup;
+hcb = hggroup(ax);
+hcbb = struct([]);
 hold on
 %% colour bins
 for ii = 1:ncols
@@ -187,28 +190,34 @@ for ii = 1:ncols
     hp(ii) = patch(xx,yy,colour_get(mean(cscv(ii:ii+1)),Vma,Vmi,cmap),'Parent',hcb);
     set(hp,'LineStyle','none')
 end
+hcbb(1).colourpatches=hp;
 %% ticks and labels
 % labels
 for itl = 1:size(ticklab,1)
-text(csctiXv(itl)',csctiYv(itl)',regexprep(ticklab(itl,:),' ',''),...
+htl(itl) = text(csctiXv(itl)',csctiYv(itl)',regexprep(ticklab(itl,:),' ',''),...
         'HorizontalAlignment',horizal,'VerticalAlignment',vertal,...
-        'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
+        'FontSize',fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb);
 end
+hcbb.ticklabels=htl;
 % ticks
 if strcmp(orie,'horizontal')
-plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
-plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
+htk(1,:) = plot([1;1]*csctiXv,cscYbo + [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl);
+htk(2,:) = plot([1;1]*csctiXv,cscYto - [0 0.2]*dY,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl);
 elseif strcmp(orie,'vertical')
-plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
-plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl)
+htk(1,:) = plot(cscXle + [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl);
+htk(2,:) = plot(cscXri - [0 0.2]*dX,[1;1]*csctiYv,'LineWidth',lw/1.5,'Parent',hcb,'color',lcl);
 end
+hcbb.ticks = htk;
 %% title
-text(titX,titY,titlestr,...
+htitl = text(titX,titY,titlestr,...
         'HorizontalAlignment',tithorizal,'VerticalAlignment',titvertal,'rotation',titrot,...
-        'FontSize',1.3*fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb)
+        'FontSize',1.3*fsz,'FontWeight',fwt,'interpreter',interpstr,'color',fcl,'Parent',hcb);
+hcbb.title = htitl;
 
-plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-','LineWidth',lw,'Parent',hcb,'color',lcl)
+hbx = plot([cscXle,cscXri,cscXri,cscXle,cscXle],[cscYbo,cscYbo,cscYto,cscYto,cscYbo],'-','LineWidth',lw,'Parent',hcb,'color',lcl);
+hcbb.box = hbx;
 
+hcb = hcbb;
 hold off
 end
 
