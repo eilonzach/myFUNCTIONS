@@ -46,7 +46,11 @@ elseif strcmp(waveform,'gauss')==1
 else
     error('That pulse shape not supported yet')
 end
-startind = max([round(nsamps*startfraction),1]);
+startind = round(nsamps*startfraction);
+if startind == 0; % bb2021.09.28 putting startfraction = 0 led to startind=0. Matlab can't use index = 0. So make it 1. 
+    startind = 1; 
+end
 xx(startind : startind + nsampsw) = amp * yy; 
 
 end
+
